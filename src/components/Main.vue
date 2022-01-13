@@ -1,49 +1,71 @@
 <template>
 
-    <section>
-        <div class="container d-flex justify-content-center"> 
+    <main>
 
-            <div class="row row-cols-2 row-cols-lg-5">
+        <h2 v-show='movies.length > 0'>Film: </h2>
 
-                <ul v-for = "(element, index) in movies" :key='index'>
-                    <li>{{ element.title }}</li>
-                    <li>{{ element.original_title }}</li>
-                    <li>{{ element.original_language }}</li>
-                    <li>{{ element.vote_average }}</li>   
-                </ul>  
+        <div class="container d-flex"> 
+
+            <div class="row row-cols-2 row-cols-lg-5 justify-content-center">            
+                <Movie 
+                    v-for = "movie in movies" 
+                    :key="movie.id" 
+                    :movieObj="movie"
+                    :movieVisible="true"
+                />                
             </div>
 
-        </div>    
-    </section>
+        </div>
+
+        <h2 v-show='series.length > 0'>Serie Tv: </h2>
+
+        <div class="container d-flex"> 
+
+            <div class="row row-cols-2 row-cols-lg-5 justify-content-center">            
+                <Serie 
+                    v-for = "serie in series" 
+                    :key="serie.id" 
+                    :serieObj="serie"
+                    :serieVisible="true"
+                />                
+            </div>
+
+        </div>
+
+
+
+
+    </main>
     
 </template>
 
 <script>
+import Movie from "./Movie.vue";
+import Serie from "./Serie.vue";
+
 export default {
     name: 'Main',
+    components: {
+        Movie,
+        Serie
+    },
     
     props: {
         movies: Array,
+        series: Array,
     },
 }
 </script>
 
 <style lang="scss" scoped>
 
-section {
+main {
     margin-top: 30px;
-    
 
-    ul{ 
-        margin: 5px;      
-        width: 250px;
-        text-align: center;
-        padding: 30px;
-        border: 3px solid black;
-
-        li {
-            list-style-type: none;
-        }
+    h2 {
+        margin-left: 15%;
+        margin-bottom: 20px;
     }
+    
 }
 </style>

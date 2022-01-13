@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Header @movies='startSearch'/>
-    <Main :movies='resultSearch' />
+    <Header @searchDone='startSearch'/>
+    <Main :movies='movieSearch' :series='serieSearch' />
+    
   </div>
 </template>
 
@@ -18,25 +19,53 @@ export default {
   },
   data: function() {
     return {
-      searchedValue:"",
-      resultSearch:[],
-
+      queryValue:"",
+      apiKey:'c2b6787a5025ee12b816659fac55db15',
+      movieSearch:[],
+      serieSearch: []
     }
   },
   methods: {
-    startSearch: function(searchCompleted){
-      console.log('test')
+    startSearch: function(userString){
+      // console.log('test')
+      this.queryValue = userString;
 
-      this.searchedValue = searchCompleted;
-      axios.get('https://api.themoviedb.org/3/search/movie', {
-        params: {
-          api_key: 'c2b6787a5025ee12b816659fac55db15',
-          query: this.searchedValue,
+      this.getContents();
+      this.getSerie();
+    },
+    // Chiamata Api movies
+    getContents: function() {
+      axios.get(
+        'https://api.themoviedb.org/3/search/movie', 
+        {
+          params: {
+            api_key: this.apiKey,
+            // api_key: 'c2b6787a5025ee12b816659fac55db15',
+            query: this.queryValue,
+          }
         }
-      }).then ((response) => {
-        this.resultSearch = response.data.results;
+      ).then ((response) => {
+        // console.log(response);
+        this.movieSearch = response.data.results;
+      }); 
+    },  
+    // Chiamata Api series
+    getSerie: function(){
+      axios.get(
+        'https://api.themoviedb.org/3/search/tv', 
+        {
+          params: {
+            api_key: this.apiKey,
+            // api_key: 'c2b6787a5025ee12b816659fac55db15',
+            query: this.queryValue,
+          }
+        }
+      ).then ((response) => {
+        this.serieSearch = response.data.results;
       });
-    }
+      
+    },
+
   }
 };
 </script>

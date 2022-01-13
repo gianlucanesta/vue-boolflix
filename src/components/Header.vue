@@ -8,13 +8,15 @@
 
       <div class="search-bar container d-flex">
         <input 
-            v-model="searchMovie" 
+            v-model="searchText" 
             type="text" 
             class="form-control"  
             placeholder="Scegli un Film..."
         >
         
-        <button @click="searchCompleted" class="btn">Ricerca</button>
+        <button @click="userSearch" class="btn">Ricerca</button>
+        <!-- <button @click="$emit('searchDone', searchText)" class="btn">Ricerca</button> -->
+        
     </div>
 
     </section>
@@ -28,12 +30,12 @@ export default {
     name: 'Header',
     data: function (){
         return {
-            searchMovie: '',
+            searchText: ''
         }
     },
     methods: {
-        searchCompleted:function() {
-            this.$emit('movies', this.searchMovie);
+        userSearch:function() {
+            this.$emit('searchDone', this.searchText);
         }
     },
 }
@@ -41,7 +43,7 @@ export default {
 
 <style lang="scss" scoped>
 template{
-    background-color: black;
+    
 }
 section{
     padding-top: 15px;
@@ -51,7 +53,7 @@ section{
     justify-content: space-between;
     
     img{
-        width: 175px;
+        max-width: 175px;
         margin: 0 20px;
     }
     .search-bar {
