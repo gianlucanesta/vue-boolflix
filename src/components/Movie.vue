@@ -1,7 +1,10 @@
 <template v-if="movieVisible">
         
     <div class="movie d-flex justify-content-center">
+        <img :src="'https://image.tmdb.org/t/p/w342'+ movieObj.poster_path" alt="">
+
         <div class="detail">Titolo: <span class="obj">{{ movieObj.title}}</span> </div>
+        
         <div class="detail">Titolo originale: <span class="obj"> {{ movieObj.original_title}} </span></div>
         
         <div class="detail">Lingua:  
@@ -17,7 +20,17 @@
             </span>
         </div>
 
-        <div class="detail">Voto: <span class="obj"> {{ movieObj.vote_average}} </span></div> 
+        <div class="detail">Voto: 
+            <span class="star" v-for="n in 5" :key="n">
+                <span class="star" v-if="n <= Vote()">
+                    <i class="fas fa-star"></i>
+                </span>
+                <span class="star" v-else>
+                    <i class="far fa-star"></i>
+                </span>
+            </span>  
+        </div> 
+
     </div>
 
 </template>
@@ -29,13 +42,19 @@
         name: 'Movie',
         data: function() {
             return{
-               flags: ['it', 'en', 'fr', 'es', 'de', 'ja' ] 
+               flags: ['it', 'en', 'fr', 'es', 'de', 'ja'] 
             };
         },
         props: {
             movieObj: Object, 
             movieVisible: Boolean,
         },
+        methods: {
+            Vote: function(){
+            let star = Math.ceil(this.movieObj.vote_average / 2)
+            return star  
+            },
+        }
     
     };
     
@@ -51,19 +70,7 @@
     margin: 5px;      
     width: 350px;
     text-align: center;
-    padding: 30px;
     border: 3px solid black;
-}
-
-.detail {
-   font-weight: bold;
-}
-
-.obj {
-    font-weight: lighter;
-}
-
-
-    
+}   
 
 </style>

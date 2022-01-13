@@ -1,5 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
-
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
 body {
     
     height: 100vh;
@@ -15,3 +15,15 @@ body {
 .flag {
     width: 25px;
 }
+
+.star {
+    color: #ffbd00;
+}
+
+.detail {
+    font-weight: bold;
+ }
+ 
+ .obj {
+     font-weight: lighter;
+ }
