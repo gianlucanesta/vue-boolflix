@@ -62,7 +62,6 @@ section{
             margin-left: 20px;
             background-color: #e50914;
             color: white;
-            
             cursor: pointer;
         }
     }

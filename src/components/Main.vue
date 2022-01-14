@@ -7,11 +7,10 @@
         <div class="container d-flex"> 
 
             <div class="row row-cols-2 row-cols-lg-5 justify-content-center">            
-                <Movie 
+                <Card
                     v-for = "movie in movies" 
                     :key="movie.id" 
-                    :movieObj="movie"
-                    :movieVisible="true"
+                    :infoObj="movie"
                 />                
             </div>
 
@@ -22,11 +21,10 @@
         <div class="container d-flex"> 
 
             <div class="row row-cols-2 row-cols-lg-5 justify-content-center">            
-                <Serie 
+                <Card
                     v-for = "serie in series" 
                     :key="serie.id" 
-                    :serieObj="serie"
-                    :serieVisible="true"
+                    :infoObj="serie"
                 />                
             </div>
 
@@ -40,14 +38,11 @@
 </template>
 
 <script>
-import Movie from "./Movie.vue";
-import Serie from "./Serie.vue";
-
+import Card from "./Card.vue";
 export default {
     name: 'Main',
     components: {
-        Movie,
-        Serie
+        Card
     },
     
     props: {
